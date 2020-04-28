@@ -2,8 +2,9 @@
 .idea
 .ipynb_checkpoints
 
-*/__pycache__
+**/__pycache__
 
+myPolkEditor/instagram/migrations
 myPolkEditor/myPolkEditor/settings.py
 parsing/config.py
 
