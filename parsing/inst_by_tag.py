@@ -5,7 +5,11 @@ import psycopg2
 import requests
 import time
 import sys
+import logging
 import config
+
+logger = logging.getLogger('instParse')
+logger.setLevel(logging.DEBUG)
 
 # Db
 engine = create_engine(config.Db.engine)
@@ -67,6 +71,7 @@ def write_to_db_post(posts):
                 print('<Error!>', 'Duplicated place object', tuple(post.values))
         except Exception as e:
             print('<Error!>', e, tuple(post.values))
+            logger.error(e)
             continue
     connect.close()
 
@@ -83,6 +88,7 @@ if (response_tag.status_code == 200):
         posts_df = posts_df.append(node, ignore_index=True)
 
     print(f"First {len(edges)} posts extracted")
+    logger.info(f"First {len(edges)} posts extracted")
 
 N = response_tag.json()['graphql']['hashtag']['edge_hashtag_to_media']['count']
 end_cursor = response_tag.json()['graphql']['hashtag']['edge_hashtag_to_media']['page_info']['end_cursor']
@@ -106,7 +112,9 @@ for i in range(int(N / STEP)):
         print(f"More {len(edges)} posts extracted")
 
     print('Sleeping for', 1, 'min')
+    logger.info(f"Sleeping for {1} min")
     time.sleep(1 * 60)
 
 posts_df.drop_duplicates(subset=['id'], keep='first', inplace=True)
 print(write_to_db_post(posts_df))
+logger.info(f"All done")
