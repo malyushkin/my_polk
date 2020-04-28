@@ -69,8 +69,8 @@ def inst_post_extract(edge_node):
 def write_to_db_post(posts):
     duplicates = 0
     connect = engine.connect()
-    query = '''INSERT INTO instagram_post (id, owner_id, shortcode, display_url, published, caption, likes_count, comments_count, is_video, inst_caption, query) 
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) ON CONFLICT DO NOTHING;'''
+    query = '''INSERT INTO instagram_post (id, owner_id, shortcode, post_url, display_url, published, caption, likes_count, comments_count, is_video, video_view_count, inst_caption, query) 
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) ON CONFLICT DO NOTHING;'''
 
     for idx, post in posts.iterrows():
         try:
