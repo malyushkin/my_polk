@@ -5,15 +5,24 @@ import psycopg2
 import requests
 import time
 import sys
+import config
 
-# 'postgresql://postgres:BeacBd7t7b$r68d@localhost:5432/dc_db'
-engine = create_engine('postgresql://postgres:BeacBd7t7b$r68d@localhost:5432/my_polk')
-psycopg2_connect = psycopg2.connect('postgresql://postgres:BeacBd7t7b$r68d@localhost:5432/my_polk')
+# Db
+engine = create_engine(config.Db.engine)
+psycopg2_connect = psycopg2.connect(config.Db.engine)
 
-tag = 'бессмертныйполкспб'
+QH = '7dabc71d3e758b1ec19ffb85639e427b'
+STEP = 30
+
+tag = None
 url_tag = f'https://www.instagram.com/explore/tags/{tag}/?__a=1'
 url_query = 'https://www.instagram.com/graphql/query/'
-step = 30
+
+if len(sys.argv) != 2:
+    print('Укажите хештег!')
+    sys.exit()
+else:
+    tag = sys.argv[1]
 
 post_columns = ['id', 'owner_id', 'shortcode', 'display_url', 'published', 'caption', 'likes_count', 'comments_count',
                 'is_video', 'inst_caption', 'query']
@@ -79,10 +88,10 @@ N = response_tag.json()['graphql']['hashtag']['edge_hashtag_to_media']['count']
 end_cursor = response_tag.json()['graphql']['hashtag']['edge_hashtag_to_media']['page_info']['end_cursor']
 
 # Остальные запросы
-for i in range(int(N / step)):
+for i in range(int(N / STEP)):
 
     params = {
-        'query_hash': '7dabc71d3e758b1ec19ffb85639e427b',
+        'query_hash': QH,
         'variables': f'{{"tag_name":"бессмертныйполкспб", "first": {i}, "after": "{end_cursor}"}}'
     }
 
