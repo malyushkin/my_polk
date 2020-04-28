@@ -36,8 +36,7 @@ url_tag = f'https://www.instagram.com/explore/tags/{tag}/?__a=1'
 url_query = 'https://www.instagram.com/graphql/query/'
 
 post_columns = ['id', 'owner_id', 'shortcode', 'post_url', 'display_url', 'published', 'caption', 'likes_count',
-                'comments_count',
-                'is_video', 'inst_caption', 'query']
+                'comments_count', 'is_video', 'video_view_count', 'inst_caption', 'query']
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36',
@@ -63,7 +62,7 @@ def inst_post_extract(edge_node):
             'comments_count': edge_node['edge_media_to_comment']['count'],
             'is_video': edge_node['is_video'],
             'video_view_count': edge_node.get('video_view_count', None),
-            'inst_caption': edge_node['accessibility_caption'],
+            'inst_caption': edge_node.get('accessibility_caption', None),
             'query': f"#{tag}"}
 
 
