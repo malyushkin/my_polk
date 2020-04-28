@@ -25,10 +25,12 @@ url_tag = f'https://www.instagram.com/explore/tags/{tag}/?__a=1'
 url_query = 'https://www.instagram.com/graphql/query/'
 
 if len(sys.argv) != 2:
-    print('Укажите номер хештега!')
+    print(f"[{datetime.now()}] \"Укажите номер хештега!\"")
     sys.exit()
 else:
     tag = tags[int(sys.argv[1])]
+    print(f"[{datetime.now()}] \"Хештег #{tag}\"")
+
 
 post_columns = ['id', 'owner_id', 'shortcode', 'display_url', 'published', 'caption', 'likes_count', 'comments_count',
                 'is_video', 'inst_caption', 'query']
@@ -70,9 +72,12 @@ def write_to_db_post(posts):
             ex = connect.execute(query, tuple(post.values))
             if not ex.rowcount:
                 duplicates += 1
-                print('<Error!>', 'Duplicated place object', tuple(post.values))
+                print(f"[{datetime.now()}] \"Error! Duplicated place object\"")
+                logger.error(f"[{datetime.now()}] \"Error! Duplicated place object\"")
         except Exception as e:
-            print('<Error!>', e, tuple(post.values))
+            print(f"[{datetime.now()}] \"Error!\"")
+            print(e)
+            logger.error(f"[{datetime.now()}] \"Error!\"")
             logger.error(e)
             continue
     connect.close()
@@ -89,8 +94,8 @@ if (response_tag.status_code == 200):
         node = inst_post_extract(edge['node'])
         posts_df = posts_df.append(node, ignore_index=True)
 
-    print(f"First {len(edges)} posts extracted")
-    logger.info(f"First {len(edges)} posts extracted")
+    print(f"[{datetime.now()}] \"First {len(edges)} posts extracted\"")
+    logger.info(f"[{datetime.now()}] \"First {len(edges)} posts extracted\"")
 
 N = response_tag.json()['graphql']['hashtag']['edge_hashtag_to_media']['count']
 end_cursor = response_tag.json()['graphql']['hashtag']['edge_hashtag_to_media']['page_info']['end_cursor']
@@ -111,12 +116,15 @@ for i in range(int(N / STEP)):
         for edge in edges:
             node = inst_post_extract(edge['node'])
             posts_df = posts_df.append(node, ignore_index=True)
-        print(f"More {len(edges)} posts extracted")
 
-    print('Sleeping for', 1, 'min')
-    logger.info(f"Sleeping for {1} min")
-    time.sleep(1 * 60)
+        print(f"[{datetime.now()}] \"More {len(edges)} posts extracted\"")
+        logger.info(f"[{datetime.now()}] \"More {len(edges)} posts extracted\"")
+
+    min = 1
+    print(f"[{datetime.now()}] \"Sleeping for {min} min\"")
+    logger.info(f"[{datetime.now()}] \"Sleeping for {min} min\"")
+    time.sleep(min * 60)
 
 posts_df.drop_duplicates(subset=['id'], keep='first', inplace=True)
 print(write_to_db_post(posts_df))
-logger.info(f"All done")
+logger.info(f"[{datetime.now()}] \"All done\"")
