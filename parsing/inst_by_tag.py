@@ -15,14 +15,8 @@ logger.setLevel(logging.DEBUG)
 engine = create_engine(config.Db.engine)
 psycopg2_connect = psycopg2.connect(config.Db.engine)
 
-QH = '7dabc71d3e758b1ec19ffb85639e427b'
-STEP = 30
-
-tag = None
 tags = ['бессмертныйполкспб', 'бессмертныйполкмосква', 'бессмертныйполккраснодар', 'бессмертныйполкказань',
         'бессмертныйполкуфа', 'бессмертныйполктюмень', 'бессмертныйполксочи', 'бессмертныйполкомск']
-url_tag = f'https://www.instagram.com/explore/tags/{tag}/?__a=1'
-url_query = 'https://www.instagram.com/graphql/query/'
 
 if len(sys.argv) != 2:
     print(f"[{datetime.now()}] \"Укажите номер хештега!\"")
@@ -31,6 +25,11 @@ else:
     tag = tags[int(sys.argv[1])]
     print(f"[{datetime.now()}] \"Хештег #{tag}\"")
 
+QH = '7dabc71d3e758b1ec19ffb85639e427b'
+STEP = 30
+
+url_tag = f'https://www.instagram.com/explore/tags/{tag}/?__a=1'
+url_query = 'https://www.instagram.com/graphql/query/'
 
 post_columns = ['id', 'owner_id', 'shortcode', 'display_url', 'published', 'caption', 'likes_count', 'comments_count',
                 'is_video', 'inst_caption', 'query']
@@ -105,7 +104,7 @@ for i in range(int(N / STEP)):
 
     params = {
         'query_hash': QH,
-        'variables': f'{{"tag_name":"бессмертныйполкспб", "first": {i}, "after": "{end_cursor}"}}'
+        'variables': f'{{"tag_name":"{tag}", "first": {i}, "after": "{end_cursor}"}}'
     }
 
     response_query = requests.get(url_query, params=params, headers=headers)
@@ -113,6 +112,10 @@ for i in range(int(N / STEP)):
     if response_query.status_code == 200:
         end_cursor = response_query.json()['data']['hashtag']['edge_hashtag_to_media']['page_info']['end_cursor']
         edges = response_query.json()['data']['hashtag']['edge_hashtag_to_media']['edges']
+        
+        if not len(edges):
+            break
+
         for edge in edges:
             node = inst_post_extract(edge['node'])
             posts_df = posts_df.append(node, ignore_index=True)
@@ -120,10 +123,14 @@ for i in range(int(N / STEP)):
         print(f"[{datetime.now()}] \"More {len(edges)} posts extracted\"")
         logger.info(f"[{datetime.now()}] \"More {len(edges)} posts extracted\"")
 
+    else:
+        break
+
     min = 1
     print(f"[{datetime.now()}] \"Sleeping for {min} min\"")
     logger.info(f"[{datetime.now()}] \"Sleeping for {min} min\"")
-    time.sleep(min * 60)
+    # time.sleep(min * 60)
+    time.sleep(5)
 
 posts_df.drop_duplicates(subset=['id'], keep='first', inplace=True)
 print(write_to_db_post(posts_df))
