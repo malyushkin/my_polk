@@ -19,14 +19,16 @@ QH = '7dabc71d3e758b1ec19ffb85639e427b'
 STEP = 30
 
 tag = None
+tags = ['бессмертныйполкспб', 'бессмертныйполкмосква', 'бессмертныйполккраснодар', 'бессмертныйполкказань',
+        'бессмертныйполкуфа', 'бессмертныйполктюмень', 'бессмертныйполксочи', 'бессмертныйполкомск']
 url_tag = f'https://www.instagram.com/explore/tags/{tag}/?__a=1'
 url_query = 'https://www.instagram.com/graphql/query/'
 
 if len(sys.argv) != 2:
-    print('Укажите хештег!')
+    print('Укажите номер хештега!')
     sys.exit()
 else:
-    tag = sys.argv[1]
+    tag = tags[int(sys.argv[1])]
 
 post_columns = ['id', 'owner_id', 'shortcode', 'display_url', 'published', 'caption', 'likes_count', 'comments_count',
                 'is_video', 'inst_caption', 'query']
