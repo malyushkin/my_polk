@@ -225,4 +225,79 @@ wait
 python inst_by_tag.py 56
 wait
 
+python inst_by_tag.py 57
+wait
+
+python inst_by_tag.py 58
+wait
+
+python inst_by_tag.py 59
+wait
+
+python inst_by_tag.py 60
+wait
+
+python inst_by_tag.py 61
+wait
+
+python inst_by_tag.py 62
+wait
+
+python inst_by_tag.py 63
+wait
+
+python inst_by_tag.py 64
+wait
+
+python inst_by_tag.py 65
+wait
+
+python inst_by_tag.py 66
+wait
+
+python inst_by_tag.py 67
+wait
+
+python inst_by_tag.py 68
+wait
+
+python inst_by_tag.py 69
+wait
+
+python inst_by_tag.py 70
+wait
+
+python inst_by_tag.py 71
+wait
+
+python inst_by_tag.py 72
+wait
+
+python inst_by_tag.py 73
+wait
+
+python inst_by_tag.py 74
+wait
+
+python inst_by_tag.py 75
+wait
+
+python inst_by_tag.py 76
+wait
+
+python inst_by_tag.py 77
+wait
+
+python inst_by_tag.py 78
+wait
+
+python inst_by_tag.py 79
+wait
+
+python inst_by_tag.py 80
+wait
+
+python inst_by_tag.py 81
+wait
+
 deactivate
