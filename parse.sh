@@ -123,4 +123,106 @@ python inst_by_tag.py 22
 wait
 echo "..Parsing finished. All done"
 
+python inst_by_tag.py 23
+wait
+
+python inst_by_tag.py 24
+wait
+
+python inst_by_tag.py 25
+wait
+
+python inst_by_tag.py 26
+wait
+
+python inst_by_tag.py 27
+wait
+
+python inst_by_tag.py 28
+wait
+
+python inst_by_tag.py 29
+wait
+
+python inst_by_tag.py 30
+wait
+
+python inst_by_tag.py 31
+wait
+
+python inst_by_tag.py 32
+wait
+
+python inst_by_tag.py 33
+wait
+
+python inst_by_tag.py 34
+wait
+
+python inst_by_tag.py 35
+wait
+
+python inst_by_tag.py 36
+wait
+
+python inst_by_tag.py 37
+wait
+
+python inst_by_tag.py 38
+wait
+
+python inst_by_tag.py 39
+wait
+
+python inst_by_tag.py 40
+wait
+
+python inst_by_tag.py 41
+wait
+
+python inst_by_tag.py 42
+wait
+
+python inst_by_tag.py 43
+wait
+
+python inst_by_tag.py 44
+wait
+
+python inst_by_tag.py 45
+wait
+
+python inst_by_tag.py 46
+wait
+
+python inst_by_tag.py 47
+wait
+
+python inst_by_tag.py 48
+wait
+
+python inst_by_tag.py 49
+wait
+
+python inst_by_tag.py 50
+wait
+
+python inst_by_tag.py 51
+wait
+
+python inst_by_tag.py 52
+wait
+
+python inst_by_tag.py 53
+wait
+
+python inst_by_tag.py 54
+wait
+
+python inst_by_tag.py 55
+wait
+
+python inst_by_tag.py 56
+wait
+
 deactivate
