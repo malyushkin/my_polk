@@ -23,4 +23,5 @@ class Post(models.Model):
     inst_caption = models.TextField(blank=True, null=True)
     query = models.CharField(max_length=255, null=False)
     note = models.TextField(blank=True, null=True)
+    status = models.BooleanField(null=False, default=True)
     created_at = models.DateTimeField(auto_now_add=True, null=False)
