@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from .models import *
+from import_export.admin import ImportExportModelAdmin, ExportMixin
 
 
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(ExportMixin, admin.ModelAdmin):
     list_display = ('shortcode', 'get_display_url', 'get_post_url', 'published', 'likes_count', 'comments_count',
                     'caption', 'query', 'is_video', 'video_view_count')
     list_filter = ('is_video', 'query')
