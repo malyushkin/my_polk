@@ -11,7 +11,7 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ('caption', 'query')
 
     def get_display_url(self, obj):
-        if obj.display_url:
+        if obj.is_video == False and obj.display_url:
             return mark_safe(f'<img src="{obj.display_url}" width="100px" />')
         else:
             return '-'
