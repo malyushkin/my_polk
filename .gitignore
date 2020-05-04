@@ -7,5 +7,6 @@
 myPolkEditor/instagram/migrations
 myPolkEditor/myPolkEditor/settings.py
 parsing/config.py
+data/
 
 env
