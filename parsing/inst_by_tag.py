@@ -15,7 +15,7 @@ import config
 engine = create_engine(config.Db.engine)
 psycopg2_connect = psycopg2.connect(config.Db.engine)
 
-tags = config.Query.tags[80:]
+tags = config.Query.tags
 
 if len(sys.argv) != 2:
     print(f"[{datetime.now()}] \"Укажите номер хештега!\"")
