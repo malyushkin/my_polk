@@ -22,5 +22,7 @@ dat = pd.read_csv('../data/instagram_post_04-05-2020__with-tags.csv')
 update_query = '''UPDATE {} SET tags = (%s) WHERE id = (%s);'''.format(INSTAGRAM_TABLE)
 db = psycopg2_connect.cursor()
 for idx, tags in dat.tags:
-    update_db_row(update_query, (tags.id, tags.tags))
+    update_db_row(update_query, (tags.id, tags.tags.strip('[]').replace('\'', '').split(', ')))
 db.close()
+
+dat.tags[0].strip('[]').replace('\'', '').split(', ')
