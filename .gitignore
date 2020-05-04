@@ -8,6 +8,6 @@ myPolkEditor/static/
 myPolkEditor/instagram/migrations
 myPolkEditor/myPolkEditor/settings.py
 parsing/config.py
-data/
+data/*.csv
 
 env
