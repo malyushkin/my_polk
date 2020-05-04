@@ -7,7 +7,7 @@ class Post(models.Model):
     '''
     Основная модель – для хранения постов Instagram.
     '''
-    id = models.BigAutoField(primary_key=True)
+    id = models.BigIntegerField(primary_key=True)
     owner_id = models.BigIntegerField(null=False)
     shortcode = models.CharField(max_length=255, unique=True, null=False)
     post_url = models.CharField(max_length=255, null=False)
@@ -22,6 +22,16 @@ class Post(models.Model):
     video_view_count = models.IntegerField(null=True)
     inst_caption = models.TextField(blank=True, null=True)
     query = models.CharField(max_length=255, null=False)
+    tags = ArrayField(models.CharField(max_length=255), blank=True, null=True)
     note = models.TextField(blank=True, null=True)
     status = models.BooleanField(null=False, default=True)
     created_at = models.DateTimeField(auto_now_add=True, null=False)
+
+
+class Hashtag(models.Model):
+    '''
+    Хештег
+    '''
+    id = models.BigAutoField(primary_key=True)
+    tag = models.CharField(max_length=255, blank=True, null=True)
+    post_id = models.ForeignKey(Post, db_column='post_id', on_delete=models.CASCADE, null=True)
