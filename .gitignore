@@ -4,6 +4,7 @@
 
 **/__pycache__
 
+myPolkEditor/static/
 myPolkEditor/instagram/migrations
 myPolkEditor/myPolkEditor/settings.py
 parsing/config.py
