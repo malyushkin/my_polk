@@ -9,5 +9,6 @@ myPolkEditor/instagram/migrations
 myPolkEditor/myPolkEditor/settings.py
 parsing/config.py
 data/*.csv
+jupyter/tutorial
 
 env
