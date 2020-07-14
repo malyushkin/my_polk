@@ -25,7 +25,10 @@ class Post(models.Model):
     tags = ArrayField(models.CharField(max_length=255), blank=True, null=True)
     note = models.TextField(blank=True, null=True)
     status = models.BooleanField(null=False, default=True)
-    created_at = models.DateTimeField(auto_now_add=True, null=False)
+    # created_at = models.DateTimeField(auto_now_add=True, null=False)
+    # updated_at = models.DateTimeField(auto_now_add=True, null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
 
 
 class Hashtag(models.Model):
