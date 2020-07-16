@@ -14,7 +14,7 @@ import time
 import psycopg2
 
 # SSH
-from sshtunnel import SSHTunnelForwarder
+# from sshtunnel import SSHTunnelForwarder
 
 # NER
 from natasha import (Doc, MorphVocab, NewsEmbedding, NewsNERTagger, Segmenter)
